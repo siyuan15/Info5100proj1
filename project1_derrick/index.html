@@ -27,7 +27,7 @@ path.country { fill: #ccc; stroke: #888;; }
 		var uberPickups = [[-73.715, 40.7],[-73.715, 40.5],[-74.4533, 40.4996]];
 
 		d3.csv("uber-raw-data-apr14ABC.csv", function (data) {
-			console.log("test")	
+			console.log("test")
 			console.log("Here")
 			data.forEach(function(d) {
 				d.Lat = +d.Lat;
@@ -43,7 +43,7 @@ path.country { fill: #ccc; stroke: #888;; }
 				// a[1] = tree.species;
 				points.push(a);
 			});
-	
+
 			//Making the map
 			d3.json("newyork.geojson", function (data) {
 
@@ -53,8 +53,9 @@ path.country { fill: #ccc; stroke: #888;; }
 					.append("g")
 
 				var projection = d3.geoMercator()
-					.scale(50000)
-					.center([-73.715, 40.7]);
+					.scale(110000)
+					.center([-73.715, 40.7])
+					.translate([700,280]);
 				var path = d3.geoPath().projection(projection);
 
 				var areas = group.append("path")
@@ -64,7 +65,7 @@ path.country { fill: #ccc; stroke: #888;; }
 
 				//Making the circles
 				var circles = svg.selectAll("circle").data(points);
-				console.log("test")	
+				console.log("test")
 
 				circles.enter().append("circle").attr("r", 1)
 					.attr("cx", function(d) {
@@ -76,7 +77,7 @@ path.country { fill: #ccc; stroke: #888;; }
 						return projection(d[0])[1]; })
 						// return projection(d)[1]; })
 					.attr("opacity", "0.1");
-				console.log("done")	
+				console.log("done")
 			});
 		});
 
