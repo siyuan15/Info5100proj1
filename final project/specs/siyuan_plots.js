@@ -16,6 +16,9 @@ var importantDates = [{"index": "1", "Date": "2014-07-07", "Name": "Uber", "Even
                       {"index": "3", "Date": "2014-09-05", "Name": "Uber", "Event1": "Third Anniversary", "Event2": "of UberX in NYC"}];
 // add axes to svg and tilt the ticks on x-axis to save room for label
 var linePlot = svgPerDay.append("g").attr("transform", "translate(0,0)");
+
+// tilt the x-axis to save space. This method was found in D3noobs under the title of  
+//“d3.js graph with rotated axis text” (http://bl.ocks.org/d3noob/ccdcb7673cdb3a796e13)
 linePlot.append("g").call(dateAxis)
   .attr("transform", "translate(0,350)")
   .selectAll("text")
