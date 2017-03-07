@@ -1,22 +1,17 @@
 html, body {
-  border: 0;
-  font: inherit;
-  font-size: 100%;
-  margin: 0;
-  padding: 0;
-  vertical-align: baseline;
-  overflow-x: hidden;
+    border: 0;
+    font: inherit;
+    font-size: 100%;
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;
+    overflow-x: hidden;
 }
 
-<<<<<<< HEAD
 #avgPickupPerHour {
   /*border: solid #ccc 1px;*/
   padding: 60px 60px 0px 60px;
   margin: auto;
-=======
-svg {
-  border: solid #ccc 1px;
->>>>>>> e56c6a136998ee7c214a8b17d33aecf7b9d6bb13
 }
 
 h3{
@@ -28,7 +23,7 @@ h3{
 
 #narrative{
   font-size: 150%;
-  margin-left: 2em;
+  margin-left: 1em;
   margin-top: 2em;
 }
 
@@ -40,11 +35,10 @@ h3{
 
 #narrative2{
   font-size: 100%;
-  /*margin-left: 6em;*/
+  margin-left: 6em;
   margin-top: 2em;
   text-align: center;
 }
-
 
 #avgPickupPerDay  {
   padding: 50px 50px 30px 70px;
@@ -116,8 +110,4 @@ h3{
 
 a:link{
   text-decoration: none;;
-}
-
-#dotPlot{
-  margin-left: 2em;
 }
