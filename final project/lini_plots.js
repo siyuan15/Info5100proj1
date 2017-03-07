@@ -58,7 +58,7 @@ svg3.append("line")
 .attr("x2", 350)
 .attr("y2", 350);
 svg3.append("text")
-.text("Avarage Income(dollars)")
+.text("Avarage Income($)")
 .attr("x",295)
 .attr("y",360)
 .attr("font-size",10);
@@ -136,17 +136,18 @@ d3.tsv("borough.tsv", parseLine, function (error, data) {
 	popCompareData.forEach(function (borough) {
 		svg.append("text")
 		.text(borough.Borough)
-		.attr("x",popScale(borough.Population))
+		.attr("x",popScale(borough.Population)-45)
 		.attr("y",pickupScale(borough.Pickup))
-		.attr("font-size",10);
+		.attr("font-size",15);
 		});
 
 		popCompareData.forEach(function (borough) {
 			svg.append("text")
-			.text("Population "+borough.Population)
-			.attr("x",popScale(borough.Population)+50)
-			.attr("y",pickupScale(borough.Pickup))
-			.attr("font-size",10);
+			.text(borough.Population+" person")
+			.attr("x",popScale(borough.Population))
+			.attr("y",pickupScale(borough.Pickup)+10)
+			.attr("font-size",11)
+			.style("fill","#341dff");
 			});
 
 		wealthCompareData = boroughData.filter(function (d) { return d.Wealth && d.Pickup; });
@@ -165,17 +166,18 @@ d3.tsv("borough.tsv", parseLine, function (error, data) {
 		wealthCompareData.forEach(function (borough) {
 			svg3.append("text")
 			.text(borough.Borough)
-			.attr("x",wealthScale(borough.Wealth))
-			.attr("y",pickupScale(borough.Pickup))
-			.attr("font-size",10);
+			.attr("x",wealthScale(borough.Wealth)+5)
+			.attr("y",pickupScale(borough.Pickup)-5)
+			.attr("font-size",15);
 			});
 
 			wealthCompareData.forEach(function (borough) {
 				svg3.append("text")
-				.text("Avarage Income "+borough.Wealth + "dollars")
-				.attr("x",wealthScale(borough.Wealth)+40)
-				.attr("y",pickupScale(borough.Pickup))
-				.attr("font-size",10)
+				.text(borough.Wealth + " $")
+				.attr("x",wealthScale(borough.Wealth)-10)
+				.attr("y",pickupScale(borough.Pickup)+6)
+				.attr("font-size",11)
+				.style("fill","#341dff");
 				});
 
 			areaCompareData = boroughData.filter(function (d) { return d.LandArea && d.Pickup; });
@@ -196,7 +198,7 @@ d3.tsv("borough.tsv", parseLine, function (error, data) {
 				.text(borough.Borough)
 				.attr("x",areaScale(borough.LandArea))
 				.attr("y",pickupScale(borough.Pickup))
-				.attr("font-size",10);
+				.attr("font-size",15);
 				});
 
 				areaCompareData.forEach(function (borough) {
@@ -204,14 +206,16 @@ d3.tsv("borough.tsv", parseLine, function (error, data) {
 					.text(borough.LandArea+" m2")
 					.attr("x",areaScale(borough.LandArea))
 					.attr("y",pickupScale(borough.Pickup)+10)
-					.attr("font-size",10);
+					.attr("font-size",11)
+					.style("fill","#341dff");
 					});
 
 					areaCompareData.forEach(function (borough) {
 						svg2.append("text")
-						.text(borough.Pickup+" person")
+						.text(borough.Pickup+" times")
 						.attr("x",areaScale(borough.LandArea))
 						.attr("y",pickupScale(borough.Pickup)+20)
-						.attr("font-size",10);
+						.attr("font-size",11)
+						.style("fill","#dc97ff");
 						});
 	});
