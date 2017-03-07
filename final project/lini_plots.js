@@ -8,9 +8,9 @@ svg.append("line")
 .attr("x2", 350)
 .attr("y2", 350);
 svg.append("text")
-.text("population")
-.attr("x",355)
-.attr("y",350)
+.text("population(person)")
+.attr("x",305)
+.attr("y",360)
 .attr("font-size",10);
 svg.append("line")
 .style("stroke","black")
@@ -19,7 +19,7 @@ svg.append("line")
 .attr("x2", 50)
 .attr("y2", 50);
 svg.append("text")
-.text("Uber Pickup Amount")
+.text("Uber Pickup Amount(times)")
 .attr("x",50)
 .attr("y",40)
 .attr("font-size",10);
@@ -44,7 +44,7 @@ svg2.append("line")
 .attr("x2", 50)
 .attr("y2", 50);
 svg2.append("text")
-.text("Uber Pickup Amount")
+.text("Uber Pickup Amount(times)")
 .attr("x",50)
 .attr("y",40)
 .attr("font-size",10);
@@ -58,8 +58,8 @@ svg3.append("line")
 .attr("x2", 350)
 .attr("y2", 350);
 svg3.append("text")
-.text("Avarage Income")
-.attr("x",330)
+.text("Avarage Income(dollars)")
+.attr("x",295)
 .attr("y",360)
 .attr("font-size",10);
 svg3.append("line")
@@ -69,7 +69,7 @@ svg3.append("line")
 .attr("x2", 50)
 .attr("y2", 50);
 svg3.append("text")
-.text("Uber Pickup Amount")
+.text("Uber Pickup Amount(times)")
 .attr("x",50)
 .attr("y",40)
 .attr("font-size",10);

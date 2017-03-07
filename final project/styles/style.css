@@ -8,10 +8,15 @@ html, body {
   overflow-x: hidden;
 }
 
+<<<<<<< HEAD
 #avgPickupPerHour {
   /*border: solid #ccc 1px;*/
   padding: 60px 60px 0px 60px;
   margin: auto;
+=======
+svg {
+  border: solid #ccc 1px;
+>>>>>>> e56c6a136998ee7c214a8b17d33aecf7b9d6bb13
 }
 
 h3{
@@ -111,4 +116,8 @@ h3{
 
 a:link{
   text-decoration: none;;
+}
+
+#dotPlot{
+  margin-left: 2em;
 }
