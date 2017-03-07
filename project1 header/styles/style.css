@@ -1,0 +1,41 @@
+html, body {
+    border: 0;
+    font: inherit;
+    font-size: 100%;
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;
+    overflow-x: hidden;
+}
+
+/*the overlay.png is created by teammate (Lini Tan)*/
+/*the p2.png is credited to https://www.linkedin.com/company-beta/1815218/?pathWildcard=1815218*/
+/*the insight of the banner design is from Lini Tan's project 1 of CS2300*/
+#banner {
+  padding: 5em 0 12em 0;
+  background-attachment: fixed;
+  background-image: url("../images/overlay.png"), url("../images/p2.png");
+  background-position: center top;
+  background-size: cover;
+  line-height: 1.75;
+  text-align: center;
+}
+
+#banner:last-child {
+    margin-bottom: 0;
+}
+
+#banner h2 {
+  color: #ffffff;
+  display: inline-block;
+  font-size: 3.5em;
+  line-height: 1.35;
+  margin-bottom: 0.5em;
+}
+
+#banner p {
+ color: #aaa;
+ font-size: 1.5em;
+ margin-bottom: 1.75em;
+ text-transform: uppercase;
+}
