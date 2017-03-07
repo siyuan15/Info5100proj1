@@ -173,7 +173,7 @@ d3.tsv("borough.tsv", parseLine, function (error, data) {
 
 			wealthCompareData.forEach(function (borough) {
 				svg3.append("text")
-				.text(borough.Wealth + " $")
+				.text("$"+borough.Wealth)
 				.attr("x",wealthScale(borough.Wealth)-10)
 				.attr("y",pickupScale(borough.Pickup)+6)
 				.attr("font-size",11)
