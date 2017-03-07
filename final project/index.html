@@ -2,117 +2,85 @@
 
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>5100 project1</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="https://d3js.org/d3.v4.min.js"></script>
-    <script src="http://d3js.org/topojson.v2.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="styles/style.css">
-    <link rel="stylesheet" type="text/css"
-          href="https://fonts.googleapis.com/css?family=EB+Garamond">
-    <link href="https://fonts.googleapis.com/css?family=UnifrakturCook:700" rel="stylesheet">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
+  <meta charset="utf-8">
+  <title>5100 Project 1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- project css file -->
+   <link rel="stylesheet" type="text/css" href="styles/style.css">
+
+  <!-- d3 links -->
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script src="http://d3js.org/topojson.v2.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+ 
+  <!-- font links -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
+
 </head>
 
 <body>
     <section id="banner">
-      <h2>Uber pickup in New York City</h2>
-      <p>Data Visualization - Project 1 <br /> </p>
+      <h2>A Look at Ride Sharing Data in New York City</h2>
+      <p>
+        Data Visualization - Project 1
+      </p>
     </section>
 
-    <div id = "narrative">
-      From July to Septembr 2014, The average number of daily pickups of Uber
-      <br>
-      in New York City was 28842, approximately 10 times more than Lyft(2909).
-      <br>
-      Graphs below shows how the amount of Uber pickup changes corresponding
-      <br>
-      to pickup location, demographic informations, and time.
+    <div class = "narrative">
+      <p class = "intro">
+        The following project, completed by Derrick Ho (dhh73), Lini Tan (lt398), and Siyuan Yin (sy652), focuses on data for ride sharing companies such as Uber and Lyft. Specifically, our intention for this project was to look at when exactly pickups were most frequently occuring along with whether there was a correlation between wealth, population, landsize, and the number of pickups. For example, while Queens is one of the larger boroughs of New York, does that have any correlation to the number of pickups. Or does the wealth level in Manhattan make a difference in this also. The below visualizations contain data from a number of different datasets and will walk you through our process of thinking. 
+      </p>
     </div>
 
-
-    <p id = "plot1">
-      <div id = "linePlots">
-        <svg id = "avgPickupPerDay" height = "400" width = "1000" ></svg>
-      </div>
-    </p>
-
-
-    <div id = "narrative1">
-      This is the number of Uber pickups per day in New York City from July 1 to September 30, 2014.
-      <br>
-      Maximum number of pickups for Uber happened on 09/13/2015 with 43205
-      <br>
-      while for Lyft it happended on 09/08/2014 with 7740 pickups.
-      <br>
-
+    <!-- plot 1 -->
+    <div class = "narrative">
+      <h3>Average pickups by Ride Sharing Company</h3>
+      <p>
+        In starting our project, we wanted to first look at how the market is divided between the two main companies, Uber and Lyft. Specifically, we looked at the average pickups per day from July to September, looking at the data by each week.<br><br>
+        From July to Septembr 2014, The average number of daily pickups of Uber in New York City was 43,205, approximately 5.5 times more than Lyft Graphs below shows how the amount of Uber pickuo changes corresponding to pickup location, demographic informations, and time. In realizing how many total ride shares occur on average, we were able to put into context the rest of our data relative to land area, population, and wealth of the New York City metro area.
+      </p>
+      <svg class = "plot1" id = "avgPickupPerDay" height = "400" width = "1000" ></svg>
     </div>
 
-    <div class = "title">
-      <h3>Pickup location VS. Number of Pickup</h3>
-    </div>
-
-    <p id = "plot2">
-      <div id = "nycMap">
-        <main class="inline-block-center">
-          <div id="left">
-        <svg id = "popularLoc" height="500" width="400"></svg>
-      </div>
-      <div>
-        <div id="oneText">
-            <p>put your text hereaaahfoahfoienvgwneogcdcsdfffdascdscdscccc</p>
-            <p>put your text hereaaahfoahfoienvgwneogcdcsdfffdascdscdscccc</p>
-          <p>put your text hereaaahfoahfoienvgwneogcdcsdfffdascdscdscccc</p><br><br><br><br><br><br><br><br>
-        </div>
-      </main>
-      </div>
-    </p>
-
-
-    <h3>Demographic information VS. Number of Pickup</h3>
-
-
-    <p id = "plot3">
-      <div id = "dotPlot">
+    <!-- plot 2 -->
+    <div>
+      <h3>Demographic information VS. Number of Pickup</h3>
+      <p class = "narrative">
+        Our next step was to look at whether there was a correlation between either land area, wealth, or population for all these pickups. <br><br>
+        Below are three different graphs that compare each category to the number of ride share pickups in each New York borough. There was no direct correlation with any of the categories except population though. We found it interesting that while Manhattan had the smallest land area, they had the highest wealth leverl, population, and overall total number of pickups. <br><br>
+        We then decided to move forward and look specifically at Manhattan and where exactly these pickups are happening.     
+      </p>
+      <div class = multiplots>
         <svg id = "area_pickup" height="400" width="400"></svg>
         <svg id = "population_pickup" height="400" width="400"></svg>
         <svg id = "wealth_pickup" height="400" width="400"></svg>
       </div>
-    </p>
-
-    <div id = "narrative2">
-      I will put my explaination here I will put my explaination here
-      <br>
-      I will put my explaination here I will put my explaination here
-      <br>
-      I will put my explaination here I will put my explaination here
-      <br>
-      I will put my explaination here I will put my explaination here
     </div>
 
-    <h3>Time VS. Number of Pickup</h3>
-
-    <p id = "plot4">
-      <div id = "squarePlots">
-        <center><svg id = "avgPickupPerHour" height = "500" width = "1000" ></svg></center>
-      </div>
-    </p>
-
-    <div id = "narrative2">
-      This heat map shows the average number of Uber pickups per hour from Monday to Sunday.
-      <br>
-      Circle are sized and colored based number of pickups in that time frame.
-      <br>
-      People tend to request Uber more towards midnight on Sunday and Monday, and more
-      <br>
-      towards 6pm from Tuesday to Saturday. Peak number of pickup(2423) happens from 5pm to 6pm
-      <br>
-      on Friday and minimun number of pickup(120) from 2am to 3am on Wednesday.
+    <!-- plot 3 -->
+    <div class = "narrative">
+      <h3>Manhattan Pickup Locations Heatmap</h3>
+      <p>
+        From July to Septembr 2014, The average number of daily pickups of Uber in New York City was 43205, approximately 5.5 times more than Lyft Graphs below shows how the amount of Uber pickuo changes corresponding to pickup location, demographic informations, and time.
+      </p>
+      <svg class = "plot1" id = "popularLoc" height="500" width="400"></svg>
     </div>
 
-    <script src="siyuan_plots.js"></script>
+    
+
+    <!-- plot 4 -->
+    <div class = "narrative">
+      <h3>Time of Day VS. Number of Pickups</h3>
+      <p>
+      From July to Septembr 2014, The average number of daily pickups of Uber in New York City was 43205, approximately 5.5 times more than Lyft Graphs below shows how the amount of Uber pickuo changes corresponding to pickup location, demographic informations, and time.
+      </p>
+      <svg id = "avgPickupPerHour" height = "500" width = "1000" >
+    </div>
+
     <script src="derrick_plots.js"></script>
+    <script src="siyuan_plots.js"></script>
     <script src="lini_plots.js"></script>
 
     </body>
