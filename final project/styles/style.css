@@ -39,9 +39,14 @@ h3{
 }
 
 .multiplots {
-  margin-left: 5%;
-  margin-right: 5%;
+  margin-left: 0;
+  margin-right: 0;
   /*width: 150%;*/
+}
+
+.wideplot {
+  margin-left: 0;
+  margin-right: 0;
 }
 
 #narrative2{
