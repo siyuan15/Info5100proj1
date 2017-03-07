@@ -9,7 +9,7 @@ html, body {
 }
 
 svg {
-  /*border: solid #ccc 1px;*/
+  border: solid #ccc 1px;
 }
 
 h3{
@@ -99,4 +99,8 @@ h3{
 
 a:link{
   text-decoration: none;;
+}
+
+#dotPlot{
+  margin-left: 2em;
 }
