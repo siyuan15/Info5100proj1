@@ -53,9 +53,9 @@ path.country { fill: #ccc; stroke: #888;; }
 					.append("g")
 
 				var projection = d3.geoMercator()
-					.scale(110000)
-					.center([-73.715, 40.7])
-					.translate([700,280]);
+					.scale(80000)
+					.center([-73.715, 40.7]);
+					//.translate([700,280]);
 				var path = d3.geoPath().projection(projection);
 
 				var areas = group.append("path")

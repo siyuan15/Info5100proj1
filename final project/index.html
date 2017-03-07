@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>5100 project1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="http://d3js.org/topojson.v2.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://fonts.googleapis.com/css?family=EB+Garamond">
+    <link href="https://fonts.googleapis.com/css?family=UnifrakturCook:700" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
+</head>
+
+<body>
+    <section id="banner">
+      <h2>Uber pickup in New York City</h2>
+      <p>Data Visualization - Project 1 <br /> </p>
+    </section>
+
+    <div id = "narrative">
+      From July to Septembr 2014, The average number of daily pickups of Uber
+      <br>
+      in New York City was 43205, approximately 5.5 times more than Lyft
+      <br>
+      Graphs below shows how the amount of Uber pickuo changes corresponding
+      <br>
+      to pickup location, demographic informations, and time.
+    </div>
+
+
+    <p id = "plot1">
+      <div id = "linePlots">
+        <center><svg id = "avgPickupPerDay" height = "400" width = "1000" ></svg></center>
+      </div>
+    </p>
+
+    <div class = "title">
+      <h3>Pickup location VS. Number of Pickup</h3>
+    </div>
+
+    <p id = "plot2">
+      <div id = "nycMap">
+        <main class="inline-block-center">
+          <div id="left">
+        <svg id = "popularLoc" height="500" width="400"></svg>
+      </div>
+      <div>
+        <div id="oneText">
+            <p>put your text hereaaahfoahfoienvgwneogcdcsdfffdascdscdscccc</p>
+            <p>put your text hereaaahfoahfoienvgwneogcdcsdfffdascdscdscccc</p>
+          <p>put your text hereaaahfoahfoienvgwneogcdcsdfffdascdscdscccc</p><br><br><br><br><br><br><br><br>
+        </div>
+      </main>
+      </div>
+    </p>
+
+
+    <h3>Demographic information VS. Number of Pickup</h3>
+
+
+    <p id = "plot3">
+      <div id = "dotPlot">
+        <svg id = "area_pickup" height="400" width="400"></svg>
+        <svg id = "population_pickup" height="400" width="400"></svg>
+        <svg id = "wealth_pickup" height="400" width="400"></svg>
+      </div>
+    </p>
+
+    <div id = "narrative2">
+      I will put my explaination here I will put my explaination here
+      <br>
+      I will put my explaination here I will put my explaination here
+      <br>
+      I will put my explaination here I will put my explaination here
+      <br>
+      I will put my explaination here I will put my explaination here
+    </div>
+
+    <h3>Put your title here</h3>
+
+    <p id = "plot4">
+      <div id = "squarePlots">
+        <center><svg id = "avgPickupPerHour" height = "500" width = "1000" ></svg></center>
+      </div>
+    </p>
+    <script src="siyuan_plots.js"></script>
+    <script src="derrick_plots.js"></script>
+    <script src="lini_plots.js"></script>
+
+    </body>
+    </html>
