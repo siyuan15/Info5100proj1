@@ -1,0 +1,65 @@
+<html>
+<head>
+<title></title>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="http://d3js.org/topojson.v2.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+<link rel="stylesheet" type="text/css" href="p1Style.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
+<link href="https://fonts.googleapis.com/css?family=Alegreya|Alegreya+Sans" rel="stylesheet">
+</head>
+<body>
+
+<div class = "title">
+  <h1>What influence Uber pickups in New York City?</h1>
+</div>
+
+<div class = "narrative">
+  From July to Septembr 2014, The average number of daily pickups of Uber
+  <br>
+  in New York City was 43205, approximately 5.5 times more than Lyft
+  <br>
+  Graphs below shows how the amount of Uber pickuo changes corresponding
+  <br>
+  to pickup location, demographic informations, and time.
+</div>
+
+
+<p id = "plot1">
+  <div id = "linePlots">
+    <center><svg id = "avgPickupPerDay" height = "400" width = "600" ></svg></center>
+  </div>
+</p>
+
+<div class = "title">
+  <h2>Pickup location VS. Number of Pickup</h2>
+</div>
+
+<p id = "plot2">
+  <div id = "nycMap">
+    <center><svg id = "popularLoc" height="500" width="400"></svg></center>
+  </div>
+</p>
+
+<div class = "title">
+  <h2>Demographic information VS. Number of Pickup</h2>
+</div>
+
+<p id = "plot3">
+  <div id = "dotPlot">
+    <svg id = "area_pickup" height="400" width="400"></svg>
+    <svg id = "population_pickup" height="400" width="400"></svg>
+    <svg id = "wealth_pickup" height="400" width="400"></svg>
+  </div>
+</p>
+
+<p id = "plot4">
+  <div id = "squarePlots">
+    <center><svg id = "avgPickupPerHour" height = "500" width = "1000" ></svg></center>
+  </div>
+</p>
+<script src="project1_siyuan/siyuan_plots.js"></script>
+<script src="project1_derrick/derrick_plots.js"></script>
+<script src="project1_lini/lini_plots.js"></script>
+</body>
+</html>
