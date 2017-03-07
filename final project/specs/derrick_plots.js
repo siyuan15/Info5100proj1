@@ -56,7 +56,7 @@ d3.csv("data/uber-raw-data.csv.csv", function (data) {
     highlights.enter().append("circle")
       .attr("class", "highlights")
       .attr("r", 38)
-      .attr("stroke", "#ffffcc")
+      .attr("stroke", "green")
       .attr("stroke-width", 3)
       .attr("fill", "none")
       .attr("cx", function(d) {

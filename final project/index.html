@@ -37,11 +37,13 @@
     <!-- plot 1 -->
     <div class = "narrative">
       <h3>Average pickups by Ride Sharing Company</h3>
-      <p>
-        In starting our project, we wanted to first look at how the market is divided between the two main companies, Uber and Lyft. Specifically, we looked at the average pickups per day from July to September, looking at the data by each week.<br><br>
-        From July to Septembr 2014, The average number of daily pickups of Uber in New York City was 43,205, approximately 5.5 times more than Lyft Graphs below shows how the amount of Uber pickuo changes corresponding to pickup location, demographic informations, and time. In realizing how many total ride shares occur on average, we were able to put into context the rest of our data relative to land area, population, and wealth of the New York City metro area.
-      </p>
-      <svg class = "plot1" id = "avgPickupPerDay" height = "400" width = "1000" ></svg>
+        <p>
+          In starting our project, we wanted to first look at how the market is divided between the two main companies, Uber and Lyft. Specifically, we looked at the average pickups per day from July to September, looking at the data by each week.<br><br>
+          From July to Septembr 2014, The average number of daily pickups of Uber in New York City was 43,205, approximately 5.5 times more than Lyft Graphs below shows how the amount of Uber pickuo changes corresponding to pickup location, demographic informations, and time. In realizing how many total ride shares occur on average, we were able to put into context the rest of our data relative to land area, population, and wealth of the New York City metro area.
+        </p>
+    </div>
+    <div class = "plotA">
+      <svg class = "plot1" id = "avgPickupPerDay" height = "400" width = "800" ></svg>
     </div>
 
     <!-- plot 2 -->
@@ -67,7 +69,7 @@
 
         We have circled the area below for reference. Midtown is known to be where most of the 'action' in New York takes place and where most people go for work. Additionally, we honed in on the most defined area in Manahattan and identified it to be Midtown.
       </p>
-      <svg class = "plot1" id = "popularLoc" height="500" width="400"></svg>
+        <svg class = "plot1" id = "popularLoc" height="500" width="400"></svg>
     </div>    
 
     <!-- plot 4 -->
@@ -76,7 +78,9 @@
       <p>
       Finally, after identifying Midtown as the most populous area for ride sharing pickups, we wanted to look at the timing of these pickups. The below graph is a representation of this data with shade and size of dot representing the amount of pickups happening at that time. The below makes sense as there is a spike of ubers getting to work on the weekdays along with people coming home from work around 6pm. It is also of note that the trend of pickups and timing of pickups are later as the week progresses which can be attributed to nightlife going on since more people are inclined to go out later in the week and on weekends.
       </p>
-        <svg id = "avgPickupPerHour" height = "500" width = "1000" >
+    </div>
+    <div class = "plotB">
+      <svg id = "avgPickupPerHour" height = "500" width = "1000" >
     </div>
 
     <script src="specs/derrick_plots.js"></script>

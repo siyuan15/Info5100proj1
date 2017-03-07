@@ -38,6 +38,21 @@ h3{
   margin: auto;
 }
 
+.plotA {
+  padding-left: 16%;
+  padding-right: 16%;;
+}
+
+.plotB {
+  padding-left: 12%;
+  padding-right: 12%;
+}
+
+.plot3 {
+  display: block;
+  margin: auto;
+}
+
 .multiplots {
   margin-left: 0;
   margin-right: 0;
