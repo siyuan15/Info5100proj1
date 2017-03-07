@@ -1,17 +1,14 @@
 html, body {
     border: 0;
-    font: inherit;
-    font-size: 100%;
-    margin: 0;
-    padding: 0;
-    vertical-align: baseline;
-    overflow-x: hidden;
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    font color: #222222;
+    margin: auto;
+    padding: auto;
 }
 
-#avgPickupPerHour {
+svg {
   /*border: solid #ccc 1px;*/
-  padding: 60px 60px 0px 60px;
-  margin: auto;
 }
 
 h3{
@@ -21,35 +18,46 @@ h3{
   font-size: 230%
 }
 
-#narrative{
-  font-size: 150%;
-  margin-left: 1em;
-  margin-top: 2em;
+.intro {
+  font-size: 15px;
+  font-style: italic;
 }
 
-#narrative1{
-  font-size: 100%;
-  margin-left: 6em;
+.narrative {
+  font-size: 15px;
   margin-top: 2em;
+  padding-left: 20%;
+  padding-right: 20%;
+  /*background-color: lightgray;*/
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.plot1 {
+  display: block;
+  margin: auto;
+}
+
+.multiplots {
+  margin-left: 5%;
+  margin-right: 5%;
+  /*width: 150%;*/
 }
 
 #narrative2{
-  font-size: 100%;
+  font-size: 150%;
   margin-left: 6em;
   margin-top: 2em;
-  text-align: center;
 }
-
 #avgPickupPerDay  {
-  padding: 50px 50px 30px 70px;
-  margin-left: 2em;
+  padding: 50px 50px 50px 100px;
   margin-top: 2em;
 }
 /*the overlay.png is created by teammate (Lini Tan)*/
 /*the p2.png is credited to https://www.linkedin.com/company-beta/1815218/?pathWildcard=1815218*/
 /*the insight of the banner design is from Lini Tan's project 1 of CS2300*/
 #banner {
-  padding: 5em 0 12em 0;
+  padding: 5em 0 5em 0;
   background-attachment: fixed;
   background-image: url("../images/overlay.png"), url("../images/p2.png");
   background-position: center top;
@@ -72,42 +80,8 @@ h3{
 
 #banner p {
  color: #aaa;
- font-size: 1.5em;
+ font-size: 20px;
  margin-bottom: 1.75em;
  text-transform: uppercase;
 }
 
-/*#popularLoc{
-  margin-left: 2em;
-}*/
-
-/*#plot2{
- width: 80%;
- margin-left: 15%;
-}*/
-
-#oneText{
-  /*padding-right: 2em;*/
-}
-
-#oneText p{
-  font-size: 150%;
-}
-#left{
-  margin-right: 2%
-}
-
-.inline-block-center {text-align: center;
-}
-
-.inline-block-center div {display: inline-block;
-    text-align: left;
-}
-
-.flex-center {display: flex;
-    justify-content: center;
-}
-
-a:link{
-  text-decoration: none;;
-}
