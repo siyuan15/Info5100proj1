@@ -101,6 +101,7 @@ function showTrends(lineData) {
         return companyColor[i];
     })
     .attr("stroke-width", "3")
+    .attr("opacity", "0.8")
     .attr("fill", "none");
 }
 

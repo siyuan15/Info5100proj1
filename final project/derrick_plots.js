@@ -23,7 +23,7 @@ d3.csv("testData.csv", function (data) {
   //Making the map
   d3.json("newyork.geojson", function (data) {
 
-    var group = svgMap.selectAll("g")
+    var group = svgMap.selectAll(".area")
       .data(data.features)
       .enter()
       .append("g")
@@ -36,22 +36,25 @@ d3.csv("testData.csv", function (data) {
     var areas = group.append("path")
       .attr("d", path)
       .attr("class", "area")
-      .attr("fill", "#238b45")
+      .attr("fill", "#8ADAC1")
 
     //Making the circles
-    var circles = svgMap.selectAll("circle").data(points);
-    var highlights = svgMap.selectAll("circle").data(highlightPoint);
+    var circles = svgMap.selectAll(".circles").data(points);
+    var highlights = svgMap.selectAll(".highlights").data(highlightPoint);
 
     circles.enter().append("circle")
+      .attr("class", "circles")
       .attr("r", 3)
       .attr("cx", function(d) {
+        //console.log(projection(d));
         return projection(d)[0]; })
       .attr("cy", function(d) {
         return projection(d)[1]; })
-      .attr("fill", "#edf8e9")
-      .attr("opacity", "0.05");
+      .attr("fill", "#006d2c")
+      .attr("opacity", "0.15");
 
     highlights.enter().append("circle")
+      .attr("class", "highlights")
       .attr("r", 38)
       .attr("stroke", "#ffffcc")
       .attr("stroke-width", 3)
