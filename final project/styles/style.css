@@ -53,6 +53,11 @@ h3{
   padding: 50px 50px 50px 100px;
   margin-top: 2em;
 }
+
+#avgPickupPerHour  {
+  padding: 60px 60px 60px 50px;
+  margin-top: 2em;
+}
 /*the overlay.png is created by teammate (Lini Tan)*/
 /*the p2.png is credited to https://www.linkedin.com/company-beta/1815218/?pathWildcard=1815218*/
 /*the insight of the banner design is from Lini Tan's project 1 of CS2300*/
@@ -84,4 +89,3 @@ h3{
  margin-bottom: 1.75em;
  text-transform: uppercase;
 }
-
