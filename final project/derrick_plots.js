@@ -50,7 +50,7 @@ d3.csv("testData.csv", function (data) {
         return projection(d)[0]; })
       .attr("cy", function(d) {
         return projection(d)[1]; })
-      .attr("fill", "#006d2c")
+      .attr("fill", "white")
       .attr("opacity", "0.15");
 
     highlights.enter().append("circle")
