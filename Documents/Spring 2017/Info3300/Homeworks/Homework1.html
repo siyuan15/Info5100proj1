@@ -1,0 +1,115 @@
+<html>
+<head>
+	<title>INFO 5100 Assignment 1</title>
+</head>
+<body>
+	<h3>Name: Siyuan Yin</h3>
+	<h3>NetID: sy652</h3>
+	<p id = "p1">Problem 1: Die simulator.
+		<div id = "result1"></div>
+	<script>
+		var result1 = [];
+		function roll() {
+			var dice = [1, 2, 3, 4, 5, 6];
+			return dice[Math.floor(Math.random() * dice.length)];
+		}
+
+		for (var i = 0; i < 10; i++) {
+			result1[i] = roll();
+		}
+		document.getElementById("result1").innerText = "Result: " + result1;
+	</script>
+	</p>
+	<hr>
+
+	<p id = "p2">Problem 2: Weird die simulator.
+		<div id = "result2"></div>
+	<script>
+		var result2 = [];
+		function diceFactory(c) {
+			return function() {
+					return c[Math.floor(Math.random() * c.length)];
+			}
+		}
+		var rbg = diceFactory(["red", "green", "blue"]);
+		for (var i = 0; i < 10; i++) {
+			result2[i] = rbg();
+		}
+		document.getElementById("result2").innerText = "Result: " + result2;
+	</script>
+	</p>
+	<hr>
+
+	<p id = "p3">Problem 3: Non-transitive dice generator.
+		<div id = "result3"></div>
+	<script>
+		var result3 = [];
+		function nonTransitiveFactory(diceIndex){
+			var diceCollection = [[1, 1, 1, 5, 5, 5], [0, 0, 4, 4, 4, 4],
+														[3, 3, 3, 3, 3, 3], [2, 2, 2, 2, 6, 6]];
+			return function () {
+				var dice = diceCollection[diceIndex];
+				return dice[Math.floor(Math.random() * dice.length)];
+			}
+		}
+
+		var oneFive = nonTransitiveFactory(0);
+		for (var i = 0; i < 10; i++) {
+			result3[i] = oneFive();
+		}
+		document.getElementById("result3").innerText = "Result: " + result3;
+	</script>
+	</p>
+	<hr>
+
+	<p id="p4">Problem 4: Rolling many times.
+		<div id = "result4"></div>
+	<script>
+		var result4 = [];
+		function rollNTimes(func1, func2, n) {
+			var count = 0;
+			for (var i = 0; i < n; i++) {
+				if (func1() > func2()) {
+					count++;
+				}
+			}
+			return count;
+		}
+
+		for (var i = 0; i < 10; i++) {
+			result4[i] = rollNTimes(nonTransitiveFactory(0),
+															nonTransitiveFactory(1),
+															100);
+		}
+		document.getElementById("result4").innerText = "Result: " + result4;
+	</script>
+	</p>
+	<hr>
+
+	<p id="p5">Problem 5: All pairs comparison.
+		<div id = "result5"></div>
+		<table id = "table" border="1">
+			<script>
+				var table = document.getElementById("table");
+				for (var r = 0; r < 4; r++) {
+					var row = table.insertRow(r);
+					for (var c = 0; c < 4; c++) {
+						var cell = row.insertCell(c);
+						cell.innerText = rollNTimes(nonTransitiveFactory(r),
+																				nonTransitiveFactory(c),
+																				1000);
+					}
+				}
+				document.getElementById("result5").innerText = "Result: ";
+			</script>
+		</table>
+		<div id = "Reasoning">Since P(E0 wins E1)= P(E1 wins E2) = P(E2 wins E3) = 2/3, if
+													these dice are transitive, we would assume that
+													P(E0 wins E3) > 1/2. In fact, P(E0 wins E3) = 1/3,
+													which means the binary relation of X wins Y more than
+													half of time is not transitive on their elements. Thus
+													the set of dice are nontransitive.
+		</div>
+	</p>
+</body>
+</html>

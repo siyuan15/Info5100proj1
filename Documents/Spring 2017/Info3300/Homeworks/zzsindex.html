@@ -1,0 +1,288 @@
+<html>
+<head>
+<title> Zhishui Zheng (zz459) </title>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<style>
+body { font-family: 'Alegreya Sans', Calibri, sans-serif; }
+svg { border: solid #ccc 1px; }
+rect.bar { fill: #4169e1; }
+text.label {
+	fill: #888;
+	font-size: x-small;
+	dominant-baseline: middle;
+	text-anchor: middle;
+}
+</style>
+</head>
+<body>
+	<center><H1>INFO 5100</H1></center>
+	<center><H2>Assignment #4</H2></center>
+	<center>Zhishui Zheng</center>
+	<center>netId: zz459</center><br>
+	<center>Mar 11, 2017</center>
+
+<p id="p1"> Problem 1: Create a function plotHistogram that creates an SVG histogram for continuous (ie floating point) data. The function should take two arguments: a string representing an element id (eg "#normal") and an array of numbers. The body of the function should select the element with that id, append an SVG element inside it, construct a linear scale for the xaxis that is appropriate for the values in the data array, and then construct a histogram from the provided data array, with x- and y-axes. Use any d3 functions that are useful. Axis ticks do not have to line up with bars. (30 pts)</p>
+	<script>
+		function plotHistogram(elementId, array) {
+			var height = 200;
+			var width = 500;
+			var padding = 20;
+			var rounder = d3.format(".2f");
+
+			var svg = d3.select(elementId).append("svg")
+			.attr("height", height + padding)
+			.attr("width", width + padding);
+
+			var xScale = d3.scaleLinear().domain([d3.min(array),d3.max(array)]).range([padding, width-padding]);
+
+			var bins = d3.histogram().domain(xScale.domain()).thresholds(xScale.ticks(10))(array);
+			console.log(bins);
+
+			var xBands = d3.scaleBand()
+			.domain(bins.map(function (bin) {
+				 return bin.x0;
+			 }))
+			.range([padding, width-padding]);
+
+			// var yScale = d3.scaleLinear().domain([0, d3.max(bins, function(d) { return d.length;})]).range([height-padding, padding]);
+			var yScale = d3.scaleLinear()
+			.domain([0,d3.max(bins, function (bin) {
+					 return bin.length;
+				 }) ])
+			.range([height - padding, padding]);
+
+			bins.forEach(function (bin) {
+				svg.append("rect").attr("class", "bar")
+				.attr("x", xBands(bin.x0))
+				.attr("y", yScale(bin.length))
+				.attr("width", xBands.bandwidth() - 2)
+				.attr("height", yScale(0) - yScale(bin.length));
+
+				svg.append("text").attr("class", "label")
+				.attr("x", xBands(bin.x0) + xBands.bandwidth() / 2)
+				.attr("y", yScale(0) + (padding / 2))
+				.text(rounder(bin.x0));
+
+				svg.append("text").attr("class", "label")
+				.attr("x", xBands(bin.x0) + xBands.bandwidth() / 2)
+				.attr("y", yScale(bin.length)-10)
+				.text(bin.length)
+				.style("fill", "black");
+			});
+		}
+	</script>
+
+
+<p id="p2"> Problem 2: Normal distribution. Use d3.randomNormal() to generate a function called gaussian, which will return random values drawn from a normal (Gaussian) distribution with mean 0.0 and standard deviation 1.0. Create a function gaussian1000 that will generate an array of 1000 samples from your gaussian function. Sample an array from this function and use your plotHistogram function to create a density plot of this data. (5pts)</p>
+<div id="hist1"></div>
+	<script>
+		var gaussian = d3.randomNormal([0.0][1.0]);
+
+		var gaussian1000 = function() {
+			var array = [];
+			for (var i=0; i<1000; i++) {
+				array.push(gaussian());
+			}
+			return array;
+		}
+
+		plotHistogram("#hist1", gaussian1000());
+	</script>
+
+
+<p id="p3"> Problem 3: Now create an array of length 1000, where each element is the mean of an array returned by your gaussian1000 function (that is, generate the means of 1000 different arrays, each of length 1000). The function d3.mean() will be useful. Use your plotHistogram function to create a density plot of this array of means. Does it have roughly the same shape as the plot from Problem 2, and does it have the same x-scale? If not, how is it different? (5 pts)</p>
+<div id="hist2"></div>
+	<script>
+		var meanGaussian = function() {
+			array = []
+			for (var i=0; i<1000; i++) {
+				array.push(d3.mean(gaussian1000()));
+			}
+			return array;
+		}
+
+		plotHistogram("#hist2", meanGaussian());
+	</script>
+
+
+<p id="p4"> Problem 4: Lognormal distribution. You can generate a sample from a lognormal distribution by generating a sample from a Gaussian distribution, and then exponentiating that value with Math.exp(). Create a function lognormal1000 that will generate an array of 1000 samples from a lognormal distribution. You can use your gaussian function from the previous problems. Sample an array from this function and use your plotHistogram function to create a density plot of this data. (5 pts)</p>
+<div id="hist3"></div>
+	<script>
+		var lognormal1000 = function() {
+			var array = [];
+			for (var i=0; i<1000; i++) {
+				array.push(Math.exp(gaussian()));
+			}
+			return array;
+		}
+
+		plotHistogram("#hist3", lognormal1000());
+	</script>
+
+<p id="p5"> Problem 5: Create an array of length 1000, where each element is the mean of an array returned by your lognormal1000 function (that is, generate the means of 1000 different arrays, each of length 1000). The function d3.mean() will be useful. Use your plotHistogram function to create a density plot of this array of means. Does it have roughly the same shape as the plot from Problem 2, and does it have the same x-scale? If not, how is it different? (5 pts)</p>
+<div id="hist4"></div>
+	<script>
+	var meanLognormal1000 = function() {
+		var array = [];
+		for (var i=0; i<1000; i++) {
+			array.push(d3.mean(lognormal1000()));
+		}
+		return array;
+	}
+
+	plotHistogram("#hist4", meanLognormal1000());
+	</script>
+
+<p id="p6"> Problem 6: Exponential distribution. You can generate a sample from this distribution with this expression:<br>-Math.log(Math.random())<br>Create a function exponential1000 that will generate an array of 1000 numbers drawn from an exponential distribution. Sample an array from this function and use your plotHistogram function to create a density plot of this data. (5 pts)</p>
+<div id="hist5"></div>
+	<script>
+		var exponential1000 = function() {
+			var array = [];
+			for (var i=0; i<1000; i++) {
+				array.push(Math.log(Math.random()));
+			}
+			return array;
+		}
+
+		plotHistogram("#hist5", exponential1000());
+	</script>
+
+<p id="p7"> Problem 7: (Seeing a pattern?) Create an array of length 1000, where each element is the mean of an array returned by your exponential1000 function. Use your plotHistogram function to create a density plot of these means. Does the histogram of the distribution (from the previous question) look like the histogram of the mean of samples from the distribution? If not, how is it different? (5 pts)</p>
+<div id="hist6"></div>
+	<script>
+		var meanExponential1000 = function() {
+			var array = [];
+			for (var i=0; i<1000; i++) {
+				array.push(d3.mean(exponential1000()));
+			}
+			return array;
+		}
+
+		plotHistogram("#hist6", meanExponential1000());
+	</script>
+
+<p id="p8"> Problem 8: Gamma distribution. The gamma distribution has a parameter α (there's another one too, but we'll ignore it). The sum of n exponential random variables is a samples from a gamma distribution with α=n. Create a function gamma1000 that will generate an array of 1000 numbers drawn from a gamma distribution with α=10 (hard code this parameter). Sample an array from this function and use your plotHistogram function to create a density plot of this data. (5 pts)</p>
+<div id="hist7"></div>
+	<script>
+		var gamma1000 = function() {
+			var array = [];
+			for (var i=0; i<1000; i++) {
+				var sum = 0;
+				for (var j=0; j<10; j++) {
+					var sum = sum + Math.log(Math.random());
+				}
+				array.push(sum);
+			}
+			return array;
+		}
+
+		plotHistogram("#hist7", gamma1000());
+	</script>
+
+<p id="p9"> Problem 9: Create an array of length 1000, where each element is the mean of an array returned by
+your gamma1000 function. Use your plotHistogram function to create a density plot of
+these means. Does the histogram of the distribution (from the previous question) look like
+the histogram of the mean of samples from the distribution? If not, how is it different? (5
+pts)</p>
+<div id="hist8"></div>
+	<script>
+		var meanGamma1000 = function() {
+			var array = [];
+			for (var i=0; i<1000; i++) {
+				array.push(d3.mean(gamma1000()));
+			}
+			return array;
+		}
+
+		plotHistogram("#hist8", meanGamma1000());
+	</script>
+
+<p id="p10"> Problem 10: Cauchy distribution. Remember about those "mild conditions"? This one doesn't meet them. You can generate a sample from this distribution with this expression:<br>gaussian() / gaussian()<br>where gaussian is the Gaussian random variable generator function you created in Problem 2. The expression samples two independent Gaussian random variables and returns their ratio.<br>Create a function cauchy1000 that will generate an array of 1000 numbers drawn from a Cauchy distribution. Sample an array from this function and use your plotHistogram function to create a density plot of this data. (5 pts)</p>
+<div id="hist9"></div>
+	<script>
+		var cauchy1000 = function() {
+			var array = [];
+			for (var i=0; i<1000; i++) {
+				array.push(gaussian() / gaussian());
+			}
+			return array;
+		}
+
+		plotHistogram("#hist9", cauchy1000());
+	</script>
+
+<p id="p11"> Problem 11: Create an array of length 1000, where each element is the mean of an array returned by your cauchy1000 function. Use your plotHistogram function to create a density plot of these means. Does the histogram of the means from this distribution look like the histograms of means from Problems 3, 5, 7, and 9? If not, how is it different? Pay particular attention to the x-axis. (5 pts)</p>
+<div id="hist10"></div>
+	<script>
+		var meanCauchy1000 = function() {
+			var array = [];
+			for (var i=0; i<1000; i++) {
+				array.push(d3.mean(cauchy1000()));
+			}
+			return array;
+		}
+
+		plotHistogram("#hist10", meanCauchy1000());
+	</script>
+
+
+<p id="p12"> Problem 12: In a < p> tag, place an SVG element of height and width of at least 500px (you may add extra padding as needed). Write code to create an array of 121 objects that will represent a 11x11 grid. Each object should have a saturation variable with value from 0 to 100 and a lightness variable with value from 0 to 100, evenly spaced in multiples of 10. Create a function showCircles(hue, opacity) that uses the d3 "data join" (ie selectAll(), data(), enter(), attr(), and style() functions) to create or modify one circle for each object in your list. Set the radius of each circle to 20 and the stroke to #eee. Set the location of each circle to create a grid based on the associated values: lightness for y, saturation for x, with centers 40px apart. Set the fill of each circle to an HSLa color specified by the circle's lightness and saturation, and the hue and opacity values passed to the function. You may want to use d3.hsl(). Add two slider inputs, one for hue and one for opacity. Use d3 to attach event listener functions to the "input" event for these sliders to call your showCircles function with the current values of the sliders. (20 pts)</p>
+<p>
+	<input id="hue" type="range" min="0" max="360" value="0"/>
+	<label for="hue"
+         style="display: inline-block; width: 120px; text-align: left">
+         Hue = <span id="hue-value">0</span>
+  	</label>
+	<input id="opacity" type="range" min="0" max="1" step="0.01" value="0"/>
+	<label for="opacity"
+         style="display: inline-block; width: 120px; text-align: left">
+         Opacity = <span id="opa-value">0</span>
+  	</label>
+</p>
+<p  id="grid"></p>
+	<script>
+	var height = 500;
+	var width = 500;
+	var padding = 20;
+
+	var svg = d3.select("#grid").append("svg")
+	.attr("height", height + 2 * padding)
+	.attr("width", width + 2 * padding);
+
+	var array = [];
+	for (var i=0; i<11; i++) {
+		for (var j=0; j<11; j++) {
+			var object = {x: 10 * i, y: 10 * j};
+			array.push(object);
+		}
+	}
+
+	showCircles(0,0);
+	function showCircles(hue, opacity) {
+		var xScale = d3.scaleLinear().domain([0, 100]).range([50, width - 50]);
+		var yScale = d3.scaleLinear().domain([0, 100]).range([height - 50, 50]);
+
+		var hueVal, opaVal;
+
+		d3.selectAll("input").on("input", function() {
+			hueVal = document.getElementById("hue").value;
+			opaVal = document.getElementById("opacity").value;
+			d3.select("#hue-value").text(hueVal);
+			d3.select("#hue").property("value", hueVal);
+			d3.select("#opa-value").text(opaVal);
+			d3.select("#opa").property("value", opaVal);
+
+			array.forEach(function(d) {
+				svg.append("circle")
+				.attr("cx", padding + xScale(d.x))
+				.attr("cy", padding + yScale(d.y))
+				.attr("r", 20)
+				.style("fill", d3.hsl(hueVal, d.x / 100, d.y / 100))
+				.style("opacity", opaVal)
+				.style("stroke", "#eee");
+			});
+		});
+	}
+	</script>
+</body>
+</html>

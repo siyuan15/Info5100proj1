@@ -1,0 +1,29 @@
+body {
+  background-color: white;
+  margin: 0px;
+  padding: 10px;
+}
+
+.title {
+  color: Black;
+  font-family: sans-serif;
+    padding: 50px 50px 50px 50px;
+}
+
+.narrative {
+  color: #636363;
+  font-family:sans-serif;
+
+}
+
+svg {
+  padding: 50px 50px 50px 50px;
+}
+
+#popularLoc {
+  border: solid #ccc 1px;
+}
+
+#area_pickup {
+  float: left;
+}

@@ -1,0 +1,347 @@
+<html>
+<head>
+<title> Siyuan Yin sy652 </title>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+<style>
+	svg {padding: 50px 50px 50px 50px;}
+</style>
+</head>
+<body>
+<center><H1>INFO 5100</H1></center>
+<center><H2>Assignment #4</H2></center>
+<center>Siyuan Yin</center>
+<center>netId: sy652</center><br>
+
+
+<p id = "p2">P2: Normal Distribution.
+	<div id = "problem1"></div>
+</p>
+<script>
+// set height and width for svg
+function plotHistogram(id, number) {
+		var height = 300;
+		var width = 600;
+
+		var svg = d3.select(id).append("svg")
+			.attr("height", height)
+			.attr("width", width);
+		// find the min and max of the given array and construct scale for x axis
+		var min = d3.min(number)
+		var max = d3.max(number)
+		var xScale = d3.scaleLinear().domain([min, max]).range([0, width - 50]);
+
+		// initialize and generate a histogram using the given array
+		var histogram = d3.histogram()
+			.domain(xScale.domain())
+			.thresholds(xScale.ticks(20));
+
+		var bins = histogram(number);
+		console.log(bins);
+		// find the bin with most data to construct scale for y axis
+		var yScale = d3.scaleLinear()
+			.domain([0, d3.max(bins, function(b) { return b.length;})]).range([height, 0]);
+
+		// append bar to each bin to svg
+		bins.forEach(function(b) {
+			svg.append("rect")
+				.attr("class", "bar")
+				.attr("x", xScale(b.x0))
+				.attr("y", yScale(b.length))
+				.attr("width", xScale(b.x1) - xScale(b.x0))
+				.attr("height", yScale(0) - yScale(b.length))
+				.style("fill", "pink")
+				.style("stroke","white")
+				.style("stroke-width", "1");
+
+			// append range of each bin
+			svg.append("text")
+				.attr("x", xScale(b.x0) + (xScale(b.x1) - xScale(b.x0)) / 4)
+				.attr("y", yScale(b.length) - 5)
+				.style("font-size", 12)
+				.text(b.length);
+		})
+
+		// append axes
+		svg.append("g")
+			.attr("transform", "translate(0, 300)")
+			.call(d3.axisBottom(xScale))
+
+		svg.append("g")
+			.attr("transform", "translate(0, 0)")
+			.call(d3.axisLeft(yScale));
+}
+</script>
+<br>
+
+<div id="gaussian"></div>
+<script>
+function gaussian() {
+	return d3.randomNormal(0.0, 1.0);
+}
+
+function gaussian1000() {
+	return d3.range(1000).map(gaussian());
+}
+
+plotHistogram("#gaussian", gaussian1000())
+</script>
+<br>
+
+<p id = "p3">P3: Normal Distribution with mean of 1000 samples.
+	<div id = "mean1000"></div>
+	<div id = "answers">
+		Answer: It has rougly the same shape as plot in problem 2 but with difference x-scale.
+		<br>
+		The x-scale in this plot is smaller than the one in problem 2.
+	</div>
+</p>
+<script>
+function gaussian() {
+	return d3.randomNormal(0.0, 1.0);
+}
+
+function meanGaussian() {
+	return d3.range(1000).map(function() {return d3.mean(gaussian1000())});
+}
+
+plotHistogram("#mean1000", meanGaussian())
+</script>
+<br>
+
+<p id = "p4">P4: Lognormal Distribution.
+	<div id="lognormal"></div>
+</p>
+<script>
+function lognormal() {
+	return Math.exp(gaussian()())
+}
+
+function lognormal1000() {
+	return d3.range(1000).map(lognormal)
+}
+
+plotHistogram("#lognormal", lognormal1000())
+</script>
+<br>
+
+<p id = "p5">P5: Lognormal Distribution with mean of 1000 samples.
+	<div id="meanLognormal"></div>
+	<div id = "answers">
+		Answer: It has rougly the same shape as plot in problem 2 but with difference x-scale.
+		<br>
+		The x-scale in this plot is smaller and narrower than the one in problem 2.
+	</div>
+</p>
+<script>
+function meanLognormal() {
+	return d3.range(1000).map(function() {return d3.mean(lognormal1000())})
+}
+
+plotHistogram("#meanLognormal", meanLognormal())
+</script>
+<br>
+
+<p id = "p6">P6: Exponential Distribution.
+	<div id="exponential"></div>
+</p>
+<script>
+function exponential() {
+	return Math.log(Math.random());
+}
+
+function exponential1000() {
+	return d3.range(1000).map(exponential)
+}
+
+plotHistogram("#exponential", exponential1000())
+</script>
+<br>
+
+<p id = "p7">P7: Exponential Distribution with mean of 1000 samples.
+	<div id="meanExponential"></div>
+	<div id = "answers">
+		Answer: The shape of the current plot is different from the plot in problem 6.
+		<br>
+		The current plot has a bell shape, while the plot in problem 6 shows a negative skew
+		<br>
+		where data tends to distributed towards the positive side of the curve. The x-scale in problem 7
+		<br>
+		is also smaller than it in problem 6.
+		<br>
+		However, comparing to other distribution of means of samples as well as the normal distribution, the current plot has
+		<br>
+		the same bell-curve shape as those distributions. The x-scale of the current plot is
+		<br>
+		similar to(although not identical in terms of range) those distributions.
+	</div>
+
+</p>
+<script>
+function meanExponential() {
+	return d3.range(1000).map(function() {return d3.mean(exponential1000())})
+}
+
+plotHistogram("#meanExponential", meanExponential())
+</script>
+<br>
+
+<p id = "p8">P8: Gamma Distribution.
+	<div id="gamma"></div>
+</p>
+<script>
+function gamma(alpha) {
+	return d3.sum(d3.range(alpha).map(exponential))
+}
+
+function gamma1000() {
+	return d3.range(1000).map(function() {return gamma(10)})
+}
+
+plotHistogram("#gamma", gamma1000())
+</script>
+<br>
+
+<p id = "p9">P9: Gamma Distribution with mean of 1000 samples.
+	<div id="meanGamma"></div>
+	<div id = "answers">
+		Answer: The shape of the current plot is different from the plot in problem 8.
+		<br>
+		The current plot has a rough bell shape, while the plot in problem 8 shows a mild negative skew
+		<br>
+		where data tends to distributed towards the positive side of the curve. The x-scale in problem 9
+		<br>
+		is also smaller than it in problem 8.
+		<br>
+		However, comparing to other distribution of means of samples as well as the normal distribution, the current plot has
+		<br>
+		the same bell-curve shape as those distributions. The x-scale of the current plot is
+		<br>
+		similar to(although not identical in terms of range) those distributions.
+	</div>
+</p>
+<script>
+function meanGamma() {
+	return d3.range(1000).map(function() {return d3.mean(gamma1000())})
+}
+
+plotHistogram("#meanGamma", meanGamma())
+</script>
+<br>
+
+<p id = "p10">P10: Cauchy Distribution.
+	<div id="cauchy"></div>
+</p>
+<script>
+function cauchy() {
+	return gaussian()() / gaussian()()
+}
+
+function cauchy1000() {
+	return d3.range(1000).map(cauchy)
+
+}
+plotHistogram("#cauchy", cauchy1000())
+</script>
+<br>
+
+<p id = "p11">P11: Cauchy Distribution with mean of 1000 samples.
+	<div id="meanCauchy"></div>
+	<div id = "answers">
+		Answer: The shape of the current plot is different from the plot in problem 3, 5, 7, and 9.
+		<br>
+		Data in the current plot tends to distributed closely in two bins, while the plots in
+		<br>
+		problem 3, 5, 7, and 9 all have rough bell shape. The x-scale in problem 11 is also much
+		<br>
+		bigger than those in problem 3, 5, 7, and 9.
+	</div>
+</p>
+<script>
+function meanCauchy() {
+	return d3.range(1000).map(function() {return d3.mean(cauchy1000())})
+}
+plotHistogram("#meanCauchy", meanCauchy())
+</script>
+<br>
+
+<p id = "p12">P12: HSLa Colors.</p>
+
+<!-- add slider to change hue and opacity  -->
+<p id = "slider">
+	<input id = "hue" type = "range" min = "0" max = "360" value = "0"/>
+	<label for = "hue" >Hue: <span id = "hueValue">0</span>
+	</label>
+	<br>
+	<input id = "opacity" type = "range" min = "0" max = "1"
+				 step = "0.01" value = "0"/>
+	<label for = "opacity">Opacity: <span id = "opaValue">0</span>
+	</label>
+</p>
+
+<div id="hslaGrid"></div>
+
+<script>
+var hsla = d3.select("#hslaGrid").append("svg")
+	.attr("width", 550)
+	.attr("height", 550)
+
+// create obeject for the grid spaced with multiples of 10
+var grid = [];
+for (i = 0; i < 11; i++) {
+	for (j = 0; j < 11; j++) {
+		var object = {"saturation": 10 * i, "lightness": 10 * j};
+		grid.push(object);
+	}
+}
+
+// create scale for appending saturation and lightness
+var satScale = d3.scaleLinear().domain([0, 100]).range([0, 550]);
+var lightScale = d3.scaleLinear().domain([0, 100]).range([550, 0]);
+
+var hue_value, opa_value;
+
+// create grid of circles to represent hue and opacity
+function showCircles(hue, opacity) {
+
+		// create circles
+			hsla.selectAll(".circles")
+				.data(grid)
+				.enter()
+				.append("circle")
+				.attr("cx", function(d) {return satScale(d.saturation)})
+				.attr("cy", function(d) {return lightScale(d.lightness)})
+				.attr("r", 20)
+				.style("stroke", "#eee")
+				.style("fill", function(d) {
+					return d3.hsl(hue, d.saturation / 100, d.lightness / 100)})
+				.style("opacity", opacity)
+}
+
+// use user input from slider to update hue and opacity of grid
+d3.selectAll("input").on("input", function() {
+
+	// update hue of circles in the grid
+	hue_value = document.getElementById("hue").value;
+	d3.select("#hueValue").text(hue_value);
+	d3.select("#hue").property("value", hue_value);
+	hsla.selectAll("circle")
+		.style("fill", function(d) {return d3.hsl(hue_value,
+																d.saturation / 100, d.lightness / 100)});
+
+	// update opacity of circles in the grid
+	opa_value = document.getElementById("opacity").value;
+	d3.select("#opaValue").text(opa_value);
+	d3.select("#opa").property("value", opa_value);
+	hsla.selectAll("circle")
+		.style("opacity", opa_value);
+})
+
+// show grid with default hue and opacity
+showCircles(0, 0);
+
+</script>
+<br>
+
+</body>
+</html>

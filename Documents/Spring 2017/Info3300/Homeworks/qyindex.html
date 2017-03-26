@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Yang Qin yq93</title>
+	<h1>Yang Qin(yq93) | Homework4</h1>
+	<link href="https://fonts.googleapis.com/css?family=Alegreya|Alegreya+Sans" rel="stylesheet">
+	<script src="https://d3js.org/d3.v4.min.js"></script>
+	<script src="https://d3js.org/d3-geo-projection.v1.min.js"></script>
+	<script src="https://d3js.org/d3-random.v1.min.js"></script>
+
+	<style>
+	body{text-align: center; font-family: 'Avenir';}
+	.bar rect{ fill: steelblue; stroke: white;}
+	.notes {text-align: left; font-size: 12;}
+	.answers {text-align: left; font-size: 12; color:red;}
+
+	svg { border: solid #ccc 1px; }
+	</style>
+
+	<div id="normal">
+		<p class="notes">1. Create a function plotHistogram that creates an SVG histogram for continuous (ie floating point) data. The function should take two arguments: a string representing an element id (eg "#normal") and an array of numbers. The body of the function should select the element with that id, append an SVG element inside it, construct a linear scale for the xaxis that is appropriate for the values in the data array, and then construct a histogram from the provided data array, with x- and y-axes. Use any d3 functions that are useful. Axis ticks do not have to line up with bars. (30 pts)</p>
+		<p class="notes"> 2. Normal distribution. Use d3.randomNormal() to generate a function called gaussian, which will return random values drawn from a normal (Gaussian) distribution with mean 0.0 and standard deviation 1.0. Create a function gaussian1000 that will generate an array of 1000 samples from your gaussian function. Sample an array from this function and use your plotHistogram function to create a density plot of this data. (5pts)</p>
+	</div>
+	<div id="normalMean">
+		<p class="notes">3. Now create an array of length 1000, where each element is the mean of an array returned by your gaussian1000 function (that is, generate the means of 1000 different arrays, each of length 1000). The function d3.mean() will be useful. Use your plotHistogram function to create a density plot of this array of means. Does it have roughly the same shape as the plot from Problem 2, and does it have the same x-scale? If not, how is it different? (5 pts)</p>
+		<p class="answers">Answers: Yes, it's similar to the plot from Problem2, the x-scale is smaller than that from Problem2.</p>
+	</div>
+	<div id="logNormal">
+		<p class="notes">4. Lognormal distribution. You can generate a sample from a lognormal distribution by generating a sample from a Gaussian distribution, and then exponentiating that value with Math.exp(). Create a function lognormal1000 that will generate an array of 1000 samples from a lognormal distribution. You can use your gaussian function from the previous problems. Sample an array from this function and use your plotHistogram function to create a density plot of this data. (5 pts)</p>
+	</div>
+	<div id="logMean">
+		<p class="notes">5. Create an array of length 1000, where each element is the mean of an array returned by your lognormal1000 function (that is, generate the means of 1000 different arrays, each of length 1000). The function d3.mean() will be useful. Use your plotHistogram function to create a density plot of this array of means. Does it have roughly the same shape as the plot from Problem 2, and does it have the same x-scale? If not, how is it different? (5 pts)</p>
+		<p class="answers">Answers: Yes, the plot has the roughly same plot from the Problem2, the x-scale is smaller than that from previous plot.</p>
+
+	</div>
+	<div id="expNormal">
+		<p class="notes">6. Exponential distribution. You can generate a sample from this distribution with this
+        expression: -Math.log(Math.random()). Create a function exponential1000 that will generate an array of 1000 numbers drawn from an exponential distribution. Sample an array from this function and use your plotHistogram function to create a density plot of this data. (5 pts)</p>
+	</div>
+	<div id="expMean">
+		<p class="notes">7. (Seeing a pattern?) Create an array of length 1000, where each element is the mean of an array returned by your exponential1000 function. Use your plotHistogram function to create a density plot of these means. Does the histogram of the distribution (from the previous question) look like the histogram of the mean of samples from the distribution? If not, how is it different? (5 pts)</p>
+		<p class="answers">Answers: No, the plot doesn't have the similar shape as the plot from the previous one (Problem6), the x-scale is smaller than that from the previous one.</p>
+	</div>
+	<div id="gammaExp">
+		<p class="notes">8. Gamma distribution. The gamma distribution has a parameter α (there's another one too, but we'll ignore it). The sum of n exponential random variables is a samples from a gamma distribution with α=n. Create a function gamma1000 that will generate an array of 1000 numbers drawn from a gamma distribution with α=10 (hard code this parameter). Sample an array from this function and use your plotHistogram function to create a density plot of this data. (5 pts)</p>
+	</div>
+	<div id="gMean">
+		<p class="notes">9. Create an array of length 1000, where each element is the mean of an array returned by your gamma1000 function. Use your plotHistogram function to create a density plot of these means. Does the histogram of the distribution (from the previous question) look like the histogram of the mean of samples from the distribution? If not, how is it different? (5 pts)</p>
+		<p class="answers">Answers: Yes, the plot has the roughtly same shape from the previous plot (Problem8), the x-scale is smaller than that from previous plot.</p>
+	</div>
+	<div id="cauchy">
+		<p class="notes">10. Cauchy distribution. Remember about those "mild conditions"? This one doesn't meet them. You can generate a sample from this distribution with this expression: gaussian() / gaussian() where gaussian is the Gaussian random variable generator function you created in Problem 2. The expression samples two independent Gaussian random variables and returns their ratio. Create a function cauchy1000 that will generate an array of 1000 numbers drawn from a Cauchy distribution. Sample an array from this function and use your plotHistogram function to create a density plot of this data. (5 pts)</p>
+	</div>
+	<div id="cauchyMean">
+		<p class="notes">11. Create an array of length 1000, where each element is the mean of an array returned by your cauchy1000 function. Use your plotHistogram function to create a density plot of these means. Does the histogram of the means from this distribution look like the histograms of means from Problems 3, 5, 7, and 9? If not, how is it different? Pay particular attention to the x-axis. (5 pts)</p>
+		<p class="answers">Answers: No, the plot doesn't have the similar shape from the previous plots (Problem3, 5, 7, 9), the x-scale is much bigger than that from previous plots.</p>
+	</div>
+	<div id="hslChart">
+	<p class="notes">12. In a &lt;p&gt; tag, place an SVG element of height and width of at least 500px (you may add extra padding as needed). Write code to create an array of 121 objects that will represent a 11x11 grid. Each object should have a saturation variable with value from 0 to 100 and a lightness variable with value from 0 to 100, evenly spaced in multiples of 10. Create a function showCircles(hue, opacity) that uses the d3 "data join" (ie selectAll(), data(), enter(), attr(), and style() functions) to create or modify one circle for each object in your list. Set the radius of each circle to 20 and the stroke to #eee. Set the location of each circle to create a grid based on the associated values: lightness for y, saturation for x, with centers 40px apart. Set the fill of each circle to an HSLa color specified by the circle's lightness and saturation, and the hue and opacity values passed to the function. You may want to use d3.hsl(). Add two slider inputs, one for hue and one for opacity. Use d3 to attach event listener functions to the "input" event for these sliders to call your showCircles function with the current values of the sliders. (20 pts)</p>
+
+	<p>
+	  <label for="hue" 
+	         style="display: inline-block; text-align: center;">
+	         Hues: <span id="hueValue"></span>
+	  </label>
+	  <input type="range" min="0" max="360" id="hue">
+	</p>
+	<p>
+	  <label for="opacity" 
+	         style="display: inline-block; text-align: center;">
+	         Opacities: <span id="opacityValue"></span>
+	  </label>
+	  <input type="range" min="0" max="1" step = "0.1" id="opacity">
+	  
+	</p>
+		<p id = "grid"></p>
+
+	</div>
+	<!-- <svg width="960" height="500"></svg> -->
+</head>
+
+<body>
+<script type="text/javascript">
+	// (1) plot density
+	var data = [];
+	var padding = 30;
+	var width = 760;
+	var height = 360;
+	function plotHistogram(i,data){
+
+		var svg = d3.select(i)
+					.append("svg")
+					.attr("width", width)
+					.attr("height", height)
+		g = svg.append("g")
+
+		var x = d3.scaleLinear().domain([d3.min(data),d3.max(data)]).range([padding, width - padding]);
+		var bins = d3.histogram()
+	    			.domain(x.domain())
+	    			.thresholds(x.ticks(20))
+	    			(data);
+	    var y = d3.scaleLinear()
+	    		.domain([0, d3.max(bins, function(d) { return d.length;})])
+	   			.range([height - padding, padding]);
+
+
+	   	var xAxis = d3.axisBottom(x)
+	   	    svg.append("g")
+    			.attr("transform", "translate(0, 330)")
+    			.call(xAxis);
+		var yAxis = d3.axisLeft(y);
+			svg.append("g")
+				.attr("transform", "translate(30,0)")
+				.call(yAxis);
+
+
+	   	// plot bins
+		var bar = g.selectAll(".bar")
+		  .data(bins)
+		  .enter().append("g")
+		    .attr("class", "bar")
+		    .attr("transform", function(d) { return "translate(" + x(d.x0) + "," + y(d.length) + ")"; });
+
+		bar.append("rect")
+		    // .attr("x", 1)
+
+		    .attr("width", x(bins[0].x1) - x(bins[0].x0))
+		    .attr("height", function(d) { return height - padding - y(d.length); });
+
+		bar.append("text")
+    		.attr("dy", ".75em")
+   			.attr("y", -6)
+    		.attr("x", (x(bins[0].x1) - x(bins[0].x0)) / 2)
+    		.attr("text-anchor", "middle")
+    		.attr("font-size", 11)
+    		.text(function(d) { return d.length; });
+
+		};
+
+
+	// (2) Normal Distribution
+	var gaussian = d3.randomNormal(0,1)
+		function gaussian1000(){
+			normalData = []
+			normalData = d3.range(1000).map(gaussian)
+			return normalData;
+		}
+		plotHistogram("#normal",gaussian1000());
+	// (3) Mean of Normal Data Distribution
+	var normalMean = []
+		for (var i = 0; i < 1000; i++){
+			normalMean[i] = d3.mean(gaussian1000());
+		}
+		// console.log(normalMean);
+		plotHistogram("#normalMean",normalMean);
+
+
+	//  (4) Lognormal Distribution
+		function lognormal1000(){
+			var arr = gaussian1000();
+			logData = []
+			for (var i = 0; i < 1000; i++)
+			{
+				logData[i] = Math.exp(arr[i])
+			}
+			return logData;
+		}
+		plotHistogram("#logNormal",lognormal1000());
+	// (5) Mean of Lognormal Data Distribution
+	var logMean = []
+		for (var i = 0; i < 1000; i++){
+			logMean[i] = d3.mean(lognormal1000());
+		}
+		// console.log(logMean)
+		plotHistogram("#logMean",logMean);
+
+
+
+	// (6) Expoential Distribution
+	var arr1 = gaussian1000();
+		function exponential1000(){
+			expData = []
+			for (var i = 0; i < 1000; i++){
+				expData[i] = Math.log(Math.random(arr1[i]))
+			}
+			return expData;
+		}
+		plotHistogram("#expNormal", exponential1000())
+	// (7) Mean of Expoential Data Distribution
+	var expMean = []
+		for (var i = 0; i < 1000; i++){
+			expMean[i] = d3.mean(exponential1000());
+		}
+		plotHistogram("#expMean", expMean)
+
+
+	// (8) Gamma Distribution	
+		function gamma1000(){
+			gammaData = []
+			for (var i = 0; i < 1000; i++){
+				var exptemp = 0;
+				for (var j = 0; j < 10; j++){
+					exptemp = exptemp - Math.log(Math.random(gaussian()));}	
+					gammaData[i] = exptemp;		
+			}
+			return gammaData;
+		}
+		plotHistogram("#gammaExp",gamma1000());
+		// console.log(gammaData);
+	// (9) Mean of Gamma Distribution
+	var gammaMean = []
+		for (var i = 0; i < 1000; i++){
+			gammaMean[i] = d3.mean(gamma1000());
+		}
+		plotHistogram("#gMean",gammaMean);
+
+
+	// (10) Cauchy Distribution
+		function cauchy1000(){
+			cauchy = [];
+			for (var i = 0; i < 1000; i++){
+				// cauchy[i] = gaussian() / gaussian();
+				cauchy.push(gaussian()/gaussian());
+			}
+			return cauchy;
+		}
+		plotHistogram("#cauchy",cauchy1000());
+	// (11) Mean of Cauchy Distribution
+	var cauchyMean = [];
+		for (var i = 0; i < 1000; i++){
+			cauchyMean[i] = d3.mean(cauchy1000());
+		}
+		plotHistogram("#cauchyMean",cauchyMean);
+
+
+	// (12) HSLa Colors
+	var grid = d3.select("#grid")
+				.append("svg")
+				.attr("width", 560)
+				.attr("height", 560);
+	var colorData = [];
+
+	var saturation = 0;
+	var lightness = 0;
+
+
+	    for (var row = 0; row < 11; row++) {
+
+	        for (var column = 0; column < 11; column++) {
+	            colorData.push({
+	                saturation: saturation,
+	                lightness: lightness,
+
+	            })
+	            saturation += 10;
+	        }
+	        saturation = 0;
+	        lightness += 10; 
+	    }
+
+
+	// var timeSlider = d3.select("#grid").append("g")
+	// 					.call(d3.slider().axis(true).min(1970).max(2000).step(1));
+	// var hueSlider = d3.slider().min(0).max(360);
+	// var opacitySlider = d3.slider().min(0).max(1);
+
+
+	// var slider = svg.append("g")
+ //    				.attr("class", "slider")
+ //  					.attr("transform", "translate(30, 30)");
+
+	
+		
+
+
+	function showCircles(hue, opacity){
+		// var circles = grid.selectAll("circles")
+		// 					.data(colorData)
+		// 					.enter().append("circle").append("g")
+		// 					.attr("cx", function(d){return d.x})
+		// 					.attr("cy", function(d){return d.y})
+		// 					.attr("r", 20)
+		// 					// .style("fill", d3.hsl(hue, function(d){return d.x}, 
+		// 					// function(d){return d.y}, opacity))
+		// 					.style("stroke", "#eee");
+			var xScale = d3.scaleLinear().domain([0,100]).range([30, 530]);
+			var yScale = d3.scaleLinear().domain([0,100]).range([530,30])
+
+			var column = grid.selectAll(".circles")
+				.data(colorData)
+				.enter().append("circle")
+				.attr("class","circles")
+				.attr("cx", function(d) { return xScale(d.saturation); })
+				.attr("cy", function(d) { return yScale(d.lightness); })
+				.attr("r", 20)
+				.style("fill", function(d){ return d3.hsl(hue, d.saturation/100, d.lightness/100)})
+				.style("opacity", opacity)
+				.style("stroke", "#eee")
+
+	}
+
+
+
+	d3.select("#opacity").on("input", function() {showCircles(30,1); updateOp(+this.value);});
+		updateOp(0);
+		function updateOp(opacity) {
+				// adjust the text on the range slider
+				  d3.select("#opacityValue").text(opacity);
+				  d3.select("#opacity").property("value", opacity);
+
+				  // update the rircle
+				  grid.selectAll("circle") 
+					.style("opacity", opacity)
+
+				}
+
+		d3.select("#hue").on("input", function() {showCircles(30,1); update(+this.value);});
+		update(30);
+		function update(hue) {
+				// adjust the text on the range slider
+				  d3.select("#hueValue").text(hue);
+				  d3.select("#hue").property("value", hue);
+
+				  // update the rircle radius
+				  grid.selectAll("circle") 
+						.style("fill", function(d){ return d3.hsl(hue, d.saturation/100, d.lightness/100)})
+				}
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+</script>
+
+
+
+</body>
+</html>
